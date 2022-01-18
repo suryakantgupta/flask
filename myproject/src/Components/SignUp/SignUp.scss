@@ -1,0 +1,13 @@
+.signup {
+    display: grid;
+    place-items: center;
+    height: 70vh;
+
+    .form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+        height: 100px;
+    }
+}
