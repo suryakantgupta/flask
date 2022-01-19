@@ -2,8 +2,11 @@ import React, { useState } from 'react'
 import './SignUp.scss';
 import axios from 'axios';
 import { baseUrl } from '../../baseUrl';
+import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
+
+    const history = useNavigate()
 
     const [state, setState] = useState({
         username: '',
@@ -11,10 +14,20 @@ const Signup = () => {
         password: ''
     })
 
-    const handleSubmit = () => {
-        axios.post(`${baseUrl}/signup`, state)
-            .then(() => {
-                console.log('Success')
+    const handleSubmit = (e) => {
+        e.preventDefault()
+
+        let fd = new FormData()
+
+        fd.append('username', state.username)
+        fd.append('email', state.email)
+        fd.append('password', state.password)
+
+
+        axios.post(`${baseUrl}/signup`, fd)
+            .then((response) => {
+                console.log(response)
+                history('/')
             })
     }
 
