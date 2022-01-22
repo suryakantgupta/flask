@@ -1,0 +1,17 @@
+.dashboard{
+    display: flex;
+    align-items: center;
+    flex: 1;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 30px;
+
+    .blog-card {
+        height: 150px;
+        width: 200px;
+        box-shadow: 0 0 10px 1px lightgray;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}

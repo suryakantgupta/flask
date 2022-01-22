@@ -1,8 +1,9 @@
-from flask import Flask, render_template, request, redirect, url_for, jsonify
+from flask import Flask, render_template, request, redirect, url_for, jsonify, Response, json
 import pymongo
 from flask_cors import CORS
 from flask_jwt_extended import create_access_token, JWTManager, jwt_required, get_jwt_identity
 from bson.objectid import ObjectId
+from bson import json_util
 
 app = Flask(__name__)
 
@@ -12,7 +13,7 @@ jwt = JWTManager(app)
 CORS(app)
 
 client = pymongo.MongoClient("mongodb://admin:sonu66%40SURYA@thegifttown.in:27017/")
-db = client.theGifttownAppDB
+db = client.FlaskBlogProject
 
 @app.route('/')
 def index():
@@ -23,11 +24,21 @@ def index():
 @jwt_required()
 def post_blog():
     id = get_jwt_identity()
-    print(db.blogusers.find_one({'_id': ObjectId(id)}))
+    user = db.blogusers.find_one({'_id': ObjectId(id)})
 
-    # db.blogs.insert_one({'title': request.form.get('title'), 'description': request.form.get('description')})
+    db.blogs.insert_one({'title': request.form.get('title'), 'description': request.form.get('description'), 'id': id})
 
-    return "Test"
+    return "Success"
+
+@app.route('/get-blog', methods=['GET'])
+def get_blog():
+    blogs = db.blogs.find({})
+    blogslist = list(blogs)
+    print(blogslist)
+    # for document in blogs:
+    #       print(document)     
+    # return jsonify({'blogs':blogslist})
+    return json_util.dumps(blogslist)
 
 @app.route('/signup', methods=['POST'])
 def sign_up():
