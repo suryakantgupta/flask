@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { EditorState } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import { convertToHTML } from "draft-convert";
@@ -6,8 +6,17 @@ import DOMPurify from "dompurify";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import axios from 'axios';
 import { baseUrl } from '../../baseUrl';
+import { useNavigate } from 'react-router-dom';
 
 const PostBlog = () => {
+    const history = useNavigate()
+    console.log(localStorage.getItem('token'))
+
+    useEffect(() => {
+        if (localStorage.getItem('token') == null) {
+            history('/login')
+        }
+    }, [localStorage.getItem('token')]);
 
     const [title, setTitle] = useState('');
     const [editorState, setEditorState] = useState(() =>

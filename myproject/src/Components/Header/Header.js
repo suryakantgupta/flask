@@ -14,16 +14,19 @@ import MenuItem from '@mui/material/MenuItem';
 import { useNavigate } from 'react-router-dom';
 
 const pages = [{ name: 'Post Blog', link: 'post-blog' }];
-let settings
-if (localStorage.getItem('token')) {
-    settings = ['Logout'];
-} else {
-    settings = ['Login'];
-}
 
 const Header = () => {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+    const history = useNavigate()
+
+    let settings
+    if (localStorage.getItem('token')) {
+        settings = [{ name: 'Logout', onClick: () => localStorage.removeItem('token') }];
+    } else {
+        settings = [{ name: 'Login', onClick: () => history('/login') }];
+    }
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -39,8 +42,6 @@ const Header = () => {
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
     };
-
-    const history = useNavigate()
 
     return (
         <div>
@@ -119,7 +120,7 @@ const Header = () => {
                         <Box sx={{ flexGrow: 0 }}>
                             <Tooltip title="Open settings">
                                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                    <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                                    <MenuIcon />
                                 </IconButton>
                             </Tooltip>
                             <Menu
@@ -139,8 +140,8 @@ const Header = () => {
                                 onClose={handleCloseUserMenu}
                             >
                                 {settings.map((setting) => (
-                                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                        <Typography textAlign="center">{setting}</Typography>
+                                    <MenuItem onClick={setting.onClick}>
+                                        <Typography textAlign="center">{setting.name}</Typography>
                                     </MenuItem>
                                 ))}
                             </Menu>

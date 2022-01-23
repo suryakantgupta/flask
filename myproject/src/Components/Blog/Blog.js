@@ -17,20 +17,22 @@ const Blog = () => {
     }, []);
     const blog = state.filter((blog) => blog.id == id)
 
-    console.log(blog[0])
     return (
         <div
             className="blog"
         >
-            <div>
-                {blog[0].title}
-            </div>
-            <div
-                dangerouslySetInnerHTML={{
-                    __html: blog[0].description
-                }}
-            />
-
+            {blog[0] && (
+                <>
+                    <div>
+                        {blog[0].title}
+                    </div>
+                    <div
+                        dangerouslySetInnerHTML={{
+                            __html: blog[0].description
+                        }}
+                    />
+                </>
+            )}
         </div>
     )
 };
