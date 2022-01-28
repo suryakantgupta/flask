@@ -14,7 +14,7 @@ function App() {
         <Header />
         <Routes>
           <Route exact path="/" element={<Dashboard />} />
-          <Route exact path="/signup" element={<Signup />} />
+          <Route exact path="/register" element={<Signup />} />
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/post-blog" element={<PostBlog />} />
           <Route exact path="/blog/:id" element={<Blog />} />

@@ -12,6 +12,7 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { useNavigate } from 'react-router-dom';
+import './Header.scss';
 
 const pages = [{ name: 'Post Blog', link: 'post-blog' }];
 
@@ -44,21 +45,59 @@ const Header = () => {
     };
 
     return (
-        <div>
-            <AppBar position="static">
+        <div
+            className="header"
+        >
+            <AppBar
+                id="top_navig_bar"
+                position="static"
+            >
                 <Container maxWidth="xl">
-                    <Toolbar disableGutters>
+                    <Toolbar
+                        style={{
+                            justifyContent: 'space-between'
+                        }}
+                        disableGutters
+                    >
                         <Typography
+                            id="home"
                             variant="h6"
-                            noWrap
                             component="div"
                             sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
                             onClick={() => history('/')}
                         >
                             Home
                         </Typography>
-
-                        <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+                        <Typography
+                            id="pers_greet"
+                            component="div"
+                            sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
+                            onClick={() => history('/login')}
+                        >
+                            Hello Guest
+                        </Typography>
+                        <div
+                            className="login-register-container"
+                        >
+                            <Typography
+                                id="login"
+                                noWrap
+                                component="div"
+                                sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
+                                onClick={() => history('/login')}
+                            >
+                                Login
+                            </Typography>
+                            <Typography
+                                id="register"
+                                component="div"
+                                sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
+                                onClick={() => history('/register')}
+                            >
+                                Register
+                            </Typography>
+                        </div>
+                        {/* <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                             <IconButton
                                 size="large"
                                 aria-label="account of current user"
@@ -93,8 +132,8 @@ const Header = () => {
                                     </MenuItem>
                                 ))}
                             </Menu>
-                        </Box>
-                        <Typography
+                        </Box> */}
+                        {/* <Typography
                             style={{
                                 cursor: 'pointer'
                             }}
@@ -145,7 +184,7 @@ const Header = () => {
                                     </MenuItem>
                                 ))}
                             </Menu>
-                        </Box>
+                        </Box> */}
                     </Toolbar>
                 </Container>
             </AppBar>

@@ -40,10 +40,10 @@ def get_blog():
     # return jsonify({'blogs':blogslist})
     return json_util.dumps(blogslist)
 
-@app.route('/signup', methods=['POST'])
+@app.route('/register', methods=['POST'])
 def sign_up():
     try:
-        db.blogusers.insert_one({'username': request.form.get('username'), 'email': request.form.get('email'), 'password': request.form.get('password')})
+        db.blogusers.insert_one({'firstName': request.form.get('firstName'), 'email': request.form.get('email'), 'password': request.form.get('password')})
         return "Success"
     except:
         return "Fail"
