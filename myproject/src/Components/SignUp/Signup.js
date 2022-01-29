@@ -30,7 +30,7 @@ const validationSchema = yup.object({
 
 
 
-const Signup = () => {
+const Signup = (props) => {
 
     const history = useNavigate()
 
@@ -48,21 +48,7 @@ const Signup = () => {
         validationSchema: validationSchema,
 
         onSubmit: (values) => {
-            let fd = new FormData()
-
-            fd.append('username', values.firstName)
-            fd.append('email', values.email)
-            fd.append('password', values.password)
-
-            axios.post(`${baseUrl}/register`, fd)
-                .then((response) => {
-                    setOpenSnackbar(true)
-                    setSuccess(true)
-                })
-                .catch(() => {
-                    setOpenSnackbar(true)
-                    setSuccess(false)
-                })
+            props.handleSignupSubmit(values,setOpenSnackbar, setSuccess)
         }
     })
 

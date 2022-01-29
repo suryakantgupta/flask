@@ -15,7 +15,8 @@ const Blog = () => {
                 setState(response.data)
             })
     }, []);
-    const blog = state.filter((blog) => blog.id == id)
+    
+    const blog = state.filter((blog) => blog._id.$oid == id)
 
     return (
         <div

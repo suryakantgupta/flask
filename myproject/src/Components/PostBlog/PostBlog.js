@@ -10,8 +10,7 @@ import { useNavigate } from 'react-router-dom';
 
 const PostBlog = () => {
     const history = useNavigate()
-    console.log(localStorage.getItem('token'))
-
+    const [ImageSrc, setImageSrc] = useState("");
     useEffect(() => {
         if (localStorage.getItem('token') == null) {
             history('/login')
@@ -42,12 +41,28 @@ const PostBlog = () => {
 
         fd.append('title', title)
         fd.append('description', DOMPurify.sanitize(convertedContent))
+        fd.append('image', ImageSrc)
 
         axios.post(`${baseUrl}/post-blog`, fd, {
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             }
         })
+    }
+    function readFile(file) {
+        return new Promise(resolve => {
+            const reader = new FileReader()
+            reader.addEventListener('load', () => resolve(reader.result))
+            reader.readAsDataURL(file)
+        })
+    }
+
+    const onFileChange = async e => {
+        if (e.target.files && e.target.files.length > 0) {
+            const file = e.target.files[0]
+            let imageDataUrl = await readFile(file)
+            setImageSrc(imageDataUrl)
+        }
     }
     return (
         <div
@@ -82,6 +97,12 @@ const PostBlog = () => {
                     Save
                 </button>
             </div>
+
+            <input
+                type="file"
+                onChange={onFileChange}
+                accept="image/*"
+            />
             <Editor
                 editorState={editorState}
                 onEditorStateChange={handleEditorChange}
@@ -89,10 +110,6 @@ const PostBlog = () => {
                 editorClassName="editor-class"
                 toolbarClassName="toolbar-class"
             />
-            {/* <div
-                className="preview"
-                dangerouslySetInnerHTML={createMarkup(convertedContent)}
-            ></div> */}
         </div>
     )
 };

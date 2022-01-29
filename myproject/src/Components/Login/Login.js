@@ -3,57 +3,95 @@ import './Login.scss';
 import axios from 'axios';
 import { baseUrl } from '../../baseUrl';
 import { useNavigate } from 'react-router-dom';
+import * as yup from 'yup';
+import { useFormik } from 'formik';
+import { TextField } from '@mui/material';
+import LoginError from './LoginError/LoginError';
 
-const Login = () => {
+const validationSchema = yup.object({
+    email: yup
+        .string()
+        .email('Invalid email. Please check.')
+        .required('This field is required'),
+    password: yup
+        .string()
+        .max(20, 'Max 20 Characters or less')
+        .matches(/^[a-zA-Z0-9]*$/, "Your password contains invalid characters.")
+        .required('Password is required'),
+});
+
+
+
+const Login = (props) => {
 
     const history = useNavigate()
 
-    const [state, setState] = useState({
-        username: '',
-        password: ''
+    const formik = useFormik({
+        initialValues: {
+            email: '',
+            password: '',
+        },
+
+        validationSchema: validationSchema,
+
+        onSubmit: (values) => {
+            props.handleLoginSubmit(values, history)
+        }
     })
-
-    const handleSubmit = (e) => {
-        e.preventDefault()
-
-        let fd = new FormData()
-
-        fd.append('username', state.username)
-        fd.append('password', state.password)
-
-
-        axios.post(`${baseUrl}/login`, fd)
-            .then((response) => {
-                if(response.data.status == 'success'){
-                    localStorage.setItem('token', response.data.token)
-                    history('/')
-                }else{
-                    alert(response.data.message)
-                }
-            })
-    }
 
     return (
         <div
             className='login'
         >
             <form
-                onSubmit={handleSubmit}
-                className='form'
+                style={{
+                    width: '40%',
+                    marginTop: '30px'
+                }}
+                onSubmit={formik.handleSubmit}
             >
-                <input
-                    placeholder='username'
-                    value={state.username}
-                    onChange={(e) => setState({ ...state, username: e.target.value })}
-                />
-                <input
-                    placeholder='Password'
-                    value={state.password}
-                    onChange={(e) => setState({ ...state, password: e.target.value })}
-                />
+                <div
+                    className="formsection"
+                >
+                    <TextField
+                        label="Email"
+                        variant="outlined"
+                        id="email"
+                        name="email"
+                        type="email"
+                        fullWidth
+                        value={formik.values.email}
+                        onChange={formik.handleChange}
+                        error={formik.touched.email && Boolean(formik.errors.email)}
+                        helperText={formik.touched.email && formik.errors.email}
+                        inputProps={{
+                            id: 'username'
+                        }}
+                    />
+                </div>
+
+                <div
+                    className="formsection"
+                >
+                    <TextField
+                        label="Password"
+                        variant="outlined"
+                        id="password"
+                        name="password"
+                        type="text"
+                        fullWidth
+                        value={formik.values.password}
+                        onChange={formik.handleChange}
+                        error={formik.touched.password && Boolean(formik.errors.password)}
+                        helperText={formik.touched.password && formik.errors.password}
+                        inputProps={{
+                            id: 'password'
+                        }}
+                    />
+                </div>
 
                 <button
-                    type='submit'
+                    className="register-submit-btn"
                 >
                     Submit
                 </button>
