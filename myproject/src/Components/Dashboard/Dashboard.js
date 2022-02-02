@@ -68,7 +68,7 @@ const Dashboard = () => {
           >
             <img
               src={blog.image}
-              height="100"
+              height="150"
               width="300"
             />
             <h1

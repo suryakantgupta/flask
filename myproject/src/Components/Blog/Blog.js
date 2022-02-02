@@ -87,6 +87,7 @@ const Blog = (props) => {
                         >
                             Average Rating
                             <Rating
+                                className="post_rating"
                                 value={blog[0].average_rating}
                                 readOnly
                             />
@@ -94,10 +95,29 @@ const Blog = (props) => {
                         <div
                             className="blog-body-container"
                         >
-                            <div>
+                            <div
+                                style={{
+                                    fontWeight: '700',
+                                    fontSize: '30px',
+                                    position: 'relative'
+                                }}
+                            >
                                 {blog[0].title}
+                                <img
+                                    style={{
+                                        position: 'absolute',
+                                        top: '100px',
+                                        right: '100px'
+                                    }}
+                                    src={blog[0].image}
+                                    width="600"
+                                    height="300"
+                                />
                             </div>
                             <div
+                                style={{
+                                    textAlign: 'left'
+                                }}
                                 dangerouslySetInnerHTML={{
                                     __html: blog[0].description
                                 }}
@@ -122,6 +142,7 @@ const Blog = (props) => {
                         onChange={(e) => setComment(e.target.value)}
                     />
                     <Rating
+                        className="post_rating"
                         style={{
                             marginLeft: '15px'
                         }}
@@ -143,7 +164,8 @@ const Blog = (props) => {
             </div>
 
             <div
-                className="comment-container"
+                className="comment_text"
+                id="comment_text"
             >
                 {blog[0]?.comment.map((data) => {
                     return (
