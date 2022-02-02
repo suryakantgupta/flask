@@ -57,7 +57,6 @@ def post_rating():
 
     rating = db.blogs.find_one({'_id': ObjectId(request.form.get('id'))})['average_rating']
     avgrate= (rating + int(request.form.get('rating')))/2
-    print(db.blogs.update_one({'_id': ObjectId(request.form.get('id'))},{ '$set': { 'average_rating': avgrate } }))
 
     return "Success"
 
@@ -65,7 +64,6 @@ def post_rating():
 def get_blog():
     blogs = db.blogs.find({})
     blogslist = list(blogs)
-    print(blogslist)
     return json_util.dumps(blogslist)
 
 @app.route('/register', methods=['POST'])
@@ -80,7 +78,6 @@ def sign_up():
 def login():
         user = db.blogusers.find_one({'email': request.form.get('email')})
         firstName = db.blogusers.find_one({'email': request.form.get('email')})['firstName']
-        print(firstName)
         if(user):
             if(user['password'] == request.form.get('password')):
                 token = create_access_token(str(db.blogusers.find_one({'email': request.form.get('email')})['_id']))
