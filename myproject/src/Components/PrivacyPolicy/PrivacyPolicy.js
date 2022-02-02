@@ -1,9 +1,12 @@
 import React from 'react';
+import './PrivacyPolicy.scss'
 
 const PrivacyPolicy = () => {
-  return <div>
+  return (
+    <div>
       Privacy
-  </div>;
+    </div>
+  )
 };
 
 export default PrivacyPolicy;

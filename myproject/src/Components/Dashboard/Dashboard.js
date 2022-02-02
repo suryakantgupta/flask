@@ -17,6 +17,22 @@ const Dashboard = () => {
       })
   }, []);
 
+  const handleASC = () => {
+    let newState = [...state]
+    newState.sort((a, b) => {
+      return new Date(b.createdAt.$date) - new Date(a.createdAt.$date);
+    });
+    setState(newState)
+  }
+
+  const handleDSC = () => {
+    let newState = [...state]
+    newState.sort((a, b) => {
+      return new Date(a.createdAt.$date) - new Date(b.createdAt.$date);
+    });
+    setState(newState)
+  }
+
   const [sortBy, setSortBy] = useState("Select");
 
   return (
@@ -45,12 +61,14 @@ const Dashboard = () => {
             <MenuItem
               value="asc"
               disableRipple
+              onClick={handleASC}
             >
               Date (ASC)
             </MenuItem>
             <MenuItem
               value="dsc"
               disableRipple
+              onClick={handleDSC}
             >
               Date (DSC)
             </MenuItem>
