@@ -1,3 +1,50 @@
-.blog{
-    
+.blog {
+    display: flex;
+    flex-direction: column;
+    padding: 70px;
+    align-items: flex-start;
+
+    .post-comment-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: 20px;
+    }
+
+    .submit-btn {
+        margin-top: 20px;
+        background-color: black;
+        height: 40px;
+        width: 80px;
+        outline: none;
+        border: none;
+        color: white;
+        border-radius: 4px;
+    }
+
+    .comment-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .comment {
+        min-height: 60px;
+        min-width: 200px;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        border: 1px solid lightgray;
+        box-shadow: 0 0 10px lightgray;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px;
+    }
+
+    .blog-body-container{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
 }

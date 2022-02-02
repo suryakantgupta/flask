@@ -4,11 +4,12 @@ from flask_cors import CORS
 from flask_jwt_extended import create_access_token, JWTManager, jwt_required, get_jwt_identity
 from bson.objectid import ObjectId
 from bson import json_util
-from datetime import datetime
+from datetime import datetime, timedelta
 
 app = Flask(__name__)
 
 app.config["JWT_SECRET_KEY"] = "super-secret"  # Change this "super secret" with something else!
+app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(days=30)
 jwt = JWTManager(app)
 
 CORS(app)
@@ -30,6 +31,33 @@ def post_blog():
     date = datetime.now()
 
     db.blogs.insert_one({'title': request.form.get('title'), 'description': request.form.get('description'),'email': user['email'], 'firstName': user['firstName'], 'comment': [], 'average_rating': 0, 'image': request.form.get('image'), 'createdAt': date})
+
+    return "Success"
+    
+@app.route('/post-comment', methods=['POST'])
+@jwt_required()
+def post_comment():
+    id = get_jwt_identity()
+    user = db.blogusers.find_one({'_id': ObjectId(id)})
+
+    date = datetime.now()
+
+    db.blogs.update_one({'_id': ObjectId(request.form.get('id'))},{ '$push' : {'comment': {'firstName': request.form.get('firstName'),'comment': request.form.get('comment'), 'createdAt': date}}})
+
+    return "Success"
+
+@app.route('/post-rating', methods=['POST'])
+@jwt_required()
+def post_rating():
+    id = get_jwt_identity()
+    user = db.blogusers.find_one({'_id': ObjectId(id)})
+
+    date = datetime.now()
+
+
+    rating = db.blogs.find_one({'_id': ObjectId(request.form.get('id'))})['average_rating']
+    avgrate= (rating + int(request.form.get('rating')))/2
+    print(db.blogs.update_one({'_id': ObjectId(request.form.get('id'))},{ '$set': { 'average_rating': avgrate } }))
 
     return "Success"
 
