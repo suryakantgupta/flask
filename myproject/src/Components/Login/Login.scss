@@ -1,7 +1,8 @@
 .login {
     display: grid;
+    background-color: #e5e4e2 ;
     place-items: center;
-    height: 70vh;
+    height: 79vh;
 
     .form {
         display: flex;
@@ -22,6 +23,6 @@
         border-radius: 4px;
         border: none;
         outline: none;
-        color: white;
+        color: white ;
     }
 }

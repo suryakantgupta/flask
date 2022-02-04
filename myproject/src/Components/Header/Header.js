@@ -32,6 +32,9 @@ const Header = (props) => {
         >
             <AppBar
                 id="top_navig_bar"
+                style={{
+                    backgroundColor:'#796878'
+                }}
                 position="static"
             >
                 <Container maxWidth="xl">

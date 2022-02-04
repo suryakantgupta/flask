@@ -57,7 +57,7 @@ def post_rating():
 
     rating = db.blogs.find_one({'_id': ObjectId(request.form.get('id'))})['average_rating']
     avgrate= (rating + int(request.form.get('rating')))/2
-
+    db.blogs.update_one({'_id': ObjectId(request.form.get('id'))},{ '$set' : {'average_rating': avgrate}})
     return "Success"
 
 @app.route('/get-blog', methods=['GET'])
