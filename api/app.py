@@ -14,8 +14,10 @@ jwt = JWTManager(app)
 
 CORS(app)
 
-client = pymongo.MongoClient("mongodb://admin:sonu66%40SURYA@thegifttown.in:27017/")
-db = client.FlaskBlogProject
+#Used to perform connection and operation with mongodb
+#https://www.mongodb.com/languages/python#:~:text=The%20first%20step%20to%20connect,text%20editor%20like%20Textpad%2FNotepad.&text=Use%20the%20connection_string%20to%20create,get%20the%20MongoDB%20database%20connection.
+client = pymongo.MongoClient("mongodb://c21123464:Yutika2326@csmongo.cs.cf.ac.uk:27017/c21123464?authSource=c21123464")
+db = client.c21123464
 
 @app.route('/')
 def index():

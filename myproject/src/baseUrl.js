@@ -1,1 +1,1 @@
-export const baseUrl = "http://localhost:5000" //base url for backend
+export const baseUrl = "http://flaskapp-c21123464.apps.openshift.cs.cf.ac.uk" //base url for backend
