@@ -103,6 +103,11 @@ const PostBlog = () => {
                 onChange={onFileChange}
                 accept="image/*"
             />
+             {/* 
+               Used draft js to make text editor
+               Author:Jeremy Kithome (November 9, 2020)
+              https://blog.logrocket.com/building-rich-text-editors-in-react-using-draft-js-and-react-draft-wysiwy
+                             */}
             <Editor
                 editorState={editorState}
                 onEditorStateChange={handleEditorChange}

@@ -4,7 +4,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { useNavigate } from 'react-router-dom';
-import { Alert, Snackbar, TextField } from '@mui/material';
+import { Alert, Snackbar} from '@mui/material';
 import './Header.scss';
 
 const Header = (props) => {
@@ -24,12 +24,16 @@ const Header = (props) => {
             setIsLogedin(false)
             setName("Guest")
         }
-    }, [props.token, props.firstName]);
+    }, [props.token, props.firstName,isLogedin]);
 
     return (
         <div
             className="header"
         >
+            {/* 
+               Component code used from Material UI
+              https://mui.com/components/app-bar/#main-content
+                             */}
             <AppBar
                 id="top_navig_bar"
                 style={{
@@ -37,13 +41,25 @@ const Header = (props) => {
                 }}
                 position="static"
             >
+                {/* 
+               Component code used from Material UI
+              https://mui.com/components/typography/#main-content
+                             */}
                 <Container maxWidth="xl">
+                    {/* 
+               Component code used from Material UI
+              https://mui.com/components/container/#main-content
+                             */}
                     <Toolbar
                         style={{
                             justifyContent: 'space-between'
                         }}
                         disableGutters
                     >
+                         {/* 
+               Component code used from Material UI
+              https://mui.com/components/typography/#main-content
+                             */}
                         <Typography
                             style={{
                                 cursor: 'pointer'
@@ -63,7 +79,7 @@ const Header = (props) => {
                             id="pers_greet"
                             component="div"
                             sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
-                            onClick={() => history('/login')}
+                            
                         >
                             Hello {name}
                         </Typography>
@@ -78,7 +94,7 @@ const Header = (props) => {
                                 noWrap
                                 component="div"
                                 sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
-                                onClick={isLogedin ? () => { localStorage.removeItem('token'); localStorage.removeItem('firstName'); setLogoutMessage(true); props.setFirstName("Guest") } : () => history('/login')}
+                                onClick={isLogedin ? () => { localStorage.removeItem('token'); localStorage.removeItem('firstName'); setLogoutMessage(true); props.setFirstName("Guest");setIsLogedin(false) } : () => history('/login')}
                             >
                                 {isLogedin ? "Logout" : "Login"}
                             </Typography>
@@ -97,6 +113,10 @@ const Header = (props) => {
                                 </Typography>
                             )}
                         </div>
+                        {/* 
+               Component code used from Material UI
+              https://mui.com/components/snackbars/#main-content
+                             */}
                         <Snackbar
                             anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
                             open={logoutMessage}
@@ -105,6 +125,10 @@ const Header = (props) => {
                                 setLogoutMessage(false)
                             }}
                         >
+                             {/* 
+               Component code used from Material UI
+              https://mui.com/components/alert/#main-content
+                             */}
                             <Alert severity="success" sx={{ width: '100%' }}>
                                 You have been logged out.
                             </Alert>

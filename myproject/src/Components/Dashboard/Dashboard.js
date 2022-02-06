@@ -16,7 +16,10 @@ const Dashboard = () => {
         setState(response.data)
       })
   }, []);
-
+  /*
+  Code used from W3schools to make sorting logic
+  https://www.w3schools.com/jsref/jsref_sort.asp
+   */
   const handleASC = () => {
     let newState = [...state]
     newState.sort((a, b) => {
@@ -24,7 +27,10 @@ const Dashboard = () => {
     });
     setState(newState)
   }
-
+/*
+  Code used from W3schools to make sorting logic
+  https://www.w3schools.com/jsref/jsref_sort.asp
+   */
   const handleDSC = () => {
     let newState = [...state]
     newState.sort((a, b) => {
@@ -46,13 +52,25 @@ const Dashboard = () => {
           justifyContent: 'flex-end'
         }}
       >
+        {/* 
+               Component code used from Material UI
+              https://mui.com/api/form-control-label/#main-content
+                             */}
         <FormControl
           variant="outlined"
         >
+          {/* 
+                            Component code used from Material UI
+                            https://mui.com/components/selects/#main-content
+                             */}
           <Select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
           >
+            {/* 
+               Component code used from Material UI
+              https://mui.com/api/menu-item/#main-content
+                             */}
             <MenuItem
               value="Select"
             >

@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 import './Login.scss';
-import axios from 'axios';
-import { baseUrl } from '../../baseUrl';
 import { useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 import { TextField } from '@mui/material';
-import LoginError from './LoginError/LoginError';
 
+/*
+yup is used for input field validation
+https://www.npmjs.com/package/yup 
+*/
 const validationSchema = yup.object({
     email: yup
         .string()
@@ -25,7 +26,10 @@ const validationSchema = yup.object({
 const Login = (props) => {
 
     const history = useNavigate()
-
+/* 
+Formik is used for input field,state management and validation
+https://formik.org/docs/api/useFormik
+*/
     const formik = useFormik({
         initialValues: {
             email: '',
@@ -53,6 +57,10 @@ const Login = (props) => {
                 <div
                     className="formsection"
                 >
+                    {/* 
+               Component code used from Material UI
+              https://mui.com/components/text-fields/#main-content
+                             */}
                     <TextField
                         label="Email"
                         variant="outlined"

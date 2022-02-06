@@ -86,6 +86,12 @@ const Blog = (props) => {
                             }}
                         >
                             Average Rating
+
+                            {/* 
+                            Component code used from Material UI
+                            https://mui.com/components/rating/#main-content
+                             */}
+
                             <Rating
                                 className="post_rating"
                                 value={blog[0].average_rating}
@@ -95,7 +101,7 @@ const Blog = (props) => {
                         <div
                             className="blog-body-container"
                         >
-                            <div
+                            <div className='post_title'
                                 style={{
                                     fontWeight: '700',
                                     fontSize: '30px',
@@ -114,7 +120,7 @@ const Blog = (props) => {
                                     height="300"
                                 />
                             </div>
-                            <div
+                            <div className='detailed_description'
                                 style={{
                                     textAlign: 'left'
                                 }}

@@ -1,3 +1,13 @@
 .privacy-policy{
+    display: grid;
+    place-items: center;
+    height: 79vh;
+    background-color: #a9ba9d ;
+    padding-left: 5%;
+    padding-right: 5%;
     
+    .paragraph{
+        margin-left: 5%;
+        margin-right: 5%;
+    }
 }

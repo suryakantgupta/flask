@@ -12,6 +12,7 @@ import { useState } from 'react';
 import LoginError from './Components/Login/LoginError/LoginError';
 import Footer from './Components/Footer/Footer';
 import PrivacyPolicy from './Components/PrivacyPolicy/PrivacyPolicy';
+import Disclaimer from './Components/Disclaimer/Disclaimer';
 
 function App() {
   const [firstName, setFirstName] = useState("Guest");
@@ -71,6 +72,8 @@ function App() {
           <Route exact path="/post-blog" element={<PostBlog />} />
           <Route exact path="/blog/:id" element={<Blog />} />
           <Route exact path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route exact path="/disclaimer" element={<Disclaimer />} />
+        
         
         </Routes>
         <Footer />
